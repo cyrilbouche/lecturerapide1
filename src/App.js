@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Afficheur from './Afficheur.jsx';
 
@@ -9,9 +9,9 @@ function App() {
   const [fontSize, setFontSize] = useState(16);
   const [color, setColor] = useState("black");
   const [bgColor, setBgColor] = useState("yellow");
-  const [btnLecEtat, setBtnLecEtat] = useState(false);
-  const [btnPauseEtat, setBtnPauseEtat] = useState(true);
-  const [btnPauseLabel, setBtnPauseLabel] = useState("Pause");
+  //const [btnLecEtat, setBtnLecEtat] = useState(false);
+  //const [btnPauseEtat, setBtnPauseEtat] = useState(true);
+  //const [btnPauseLabel, setBtnPauseLabel] = useState("Pause");
 
   const increaseFontSize = () => {
     setFontSize(fontSize + 1);
