@@ -15,6 +15,10 @@ function App() {
   const [btnPauseLabel, setBtnPauseLabel] = useState("Pause");
   var etatLecture = false;
 
+  // Style des élements en Tailwind
+  const styleBoutons = "px-4 py-2 rounded bg-gray-700 hover:bg-gray-600 text-white ";
+  const styleBoutonLec = "px-4 py-2 rounded bg-red-700 hover:bg-red-600 text-white";
+
   // Augmenter la taille du texte
   const increaseFontSize = () => {
     setFontSize(fontSize + 1);
@@ -50,6 +54,7 @@ function App() {
     }
     else{ 
       if (!etatLecture) { // On est en pause
+        // attendre que l'utilisateur appuie sur reprendre
 
       }
       else { // Fin de la lecture
@@ -61,10 +66,10 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Lisez plus vite</h1>
+    <div className="App bg-black text-white p-20 w-full">
+      <h1 className='text-3xl font-bold'>Lisez plus vite</h1>
 
-      <div id='afficheur'>
+      <div id='afficheur' className='mb-20 p-4 rounded-lg shadow-md'>
         <Afficheur
           word={word}
           fontSize={fontSize}
@@ -74,35 +79,38 @@ function App() {
       </div>
       
       <div id='controles'>
-        <button id="bouton" disabled={btnLecEtat} onClick={() => lecture()}>Lire</button>
-        <button id="pauseBouton" disabled={btnPauseEtat}>{btnPauseLabel}</button>
+        <div id='boutons' className="mb-20 flex space-x-4 overflow-x-auto">
+          <button id="bouton" className={styleBoutonLec} disabled={btnLecEtat} onClick={() => lecture()}>Lire</button>
+          <button id="pauseBouton" className={styleBoutons} disabled={btnPauseEtat}>{btnPauseLabel}</button>
 
-        <button className="btn1" onClick={increaseFontSize}>
-          A+
-        </button>
-        <button onClick={decreaseFontSize}>
-          A-
-        </button>
+          <button className={styleBoutons} onClick={increaseFontSize}>
+            A+
+          </button>
+          <button className={styleBoutons} onClick={decreaseFontSize}>
+            A-
+          </button>
 
-        <button onClick={() => changeColor("yellow", "black")}>
-          Jaune sur noir
-        </button>
-        <button onClick={() => changeColor("black", "yellow")}>
-          Noir sur jaune
-        </button>
-        <br/>
-        <label for="delai">Délai entre 2 mots en ms (100-1000):</label>
-        <input type="number" id="delai" name="delai" min="100" max="1000" 
-        value={delai}
-        onChange={(e) => setDelai(e.target.value)}/>
+          <button className={styleBoutons} onClick={() => changeColor("yellow", "black")}>
+            Jaune sur noir
+          </button>
+          <button className={styleBoutons} onClick={() => changeColor("black", "yellow")}>
+            Noir sur jaune
+          </button>
+        </div>
+        <div className="mb-20">
+          <label for="delai">Délai entre 2 mots en ms (100-1000): </label>
+          <input className="text-black" type="number" id="delai" name="delai" min="100" max="1000" 
+          value={delai}
+          onChange={(e) => setDelai(e.target.value)}/>
+        </div>
       </div>
 
-      
-
-      <textarea id='texteALire'
-        value={textInput}
-        onChange={(e) => setTextInput(e.target.value)}
-      />
+      <div class="mb-20 w-1/1">
+        <textarea id='texteALire' class="bg-white text-black p-4 w-full h-400 rounded" 
+          value={textInput}
+          onChange={(e) => setTextInput(e.target.value)}
+        />
+      </div>
     </div>
   );
 };
